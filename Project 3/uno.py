@@ -1,116 +1,130 @@
+#----- Before Coding -----
+#Have the student break down Uno into different "code-able" steps
+
+
+#----- Example -----
+
+#Preparations: 
+# - Deck of Cards consisting of colors(B,Y,R,G) and Numbers (0...9)
+# - X number of hands (2 is what I have. Player vs AI)
+
+#Setting Up:
+# - Each Player needs 7 random cards
+# - A play pile that holds the most recent card
+
+#Playing the game:
+# - Player chooses a card
+# - Compare the chosen card to the play pile
+# - The card needs to match colors or number to be playable.
+# - If it is playable, remove the card from hand and replace with the play pile
+# - Draw a card if not playable or no cards
+
+#Same steps for AI but no picking using input
+
+
+#Win Conditions:
+# - If the hand is empty
+
+#----- Coding -----
+#Use the comments and create some space in between to write the actual code.
+
+
+
+
+
 import random
 
-#Variables needed
-deal =""
-player = list()
-computer = list()
 
-#Cards
-deck = ["G0","G1","G2","G3","G4","G5","G6","G7","G8","G9","R0","R1","R2","R3","R4","R5","R6","R7","R8","R9","B0","B1","B2","B3","B4","B5","B6","B7","B8","B9","Y0","Y1","Y2","Y3","Y4","Y5","Y6","Y7","Y8","Y9"]
+#Preparations: 
+# - Deck of Cards consisting of colors(B,Y,R,G) and Numbers (0...9)
+colors = ["b","y","g","r"]
+numbers = ["0","1","2","3","4","5","6","7","8","9"]
 
-
-
-
-#Start:
-#Split cards and give each player 5 cards 
-def init():
-  global deal
-  number = random.randint(0,39)
-  deal = deck[number]
-
-  for x in range(0, 5):
-    number = random.randint(0,39)
-    player.append(deck[number])
-    num = random.randint(0,39)
-    computer.append(deck[num])
-
-  return deal
-
-#To get color  player[select][0] return color
-#Hand is any player's hand
-def placecard(hand):
-  global deal
-  while True:
-    print("Current Card:  " + deal)
-    print(hand)
-    select =input("Postition (If no cards select none): ")
-    #else change select to int()
-    if select == "None" or select == "none" or select.isdigit() == False:
-      num = random.randint(0,39)
-      hand.append(deck[num])
-      break
-    else:
-      select = int(select)
-
-
-    if select > len(hand)-1:
-      print("Out of index. Try again! ")
-    elif hand[select][0] == deal[0]:
-
-      deal = hand[select]
-      hand.remove(hand[select])
-      break
-    elif hand[select][1] == deal[1]:
-
-      deal = hand[select]
-      hand.remove(hand[select])
-      break
-
-    else:
-      print("Invalid input")
- 
-  return hand
-
-#To get color  player[select][0] return color
-#Hand is any player's hand
-def AIplacecard(hand):
-  global deal
-  tempsize = len(hand)
-  for a in range(0,len(hand)):
-    print("Current Card:  " + deal)
-    print(hand)
-    select =random.randint(0,len(hand)-1)
-    #else change select to int()
-    
-    if hand[select][0] == deal[0]:
-      deal = hand[select]
-      hand.remove(hand[select])
-      break
-    elif hand[select][1] == deal[1]:
-
-      deal = hand[select]
-      hand.remove(hand[select])
-      break
-    else:
-      print("Finding another card!")
-  if tempsize == len(hand):
-    num = random.randint(0,39)
-    hand.append(deck[num])
-     
-  return hand
-
-
-
-def main():
-  global player
-  global computer
-  global deal
-  deal = init()
-  turn = 0
-  while True:
-    turn += 1
-    print(turn)
-    player = placecard(player)
-    turn +=1
-    print(turn)
-    computer = AIplacecard(computer)
-    if len(player) == 0 or len(computer) == 0:
-      break
-  if len(player) == 0:
-    print("Player Has Won!")
-  if len(computer) == 0:
-    print("Computer has won")
-
+#--- Since draw is used multiple times, we should create a function
+def draw():
+  #String Concatenation
+  return colors[random.randint(0,3)] + numbers[random.randint(0,8)]
   
+def unogame():
+  # - X number of hands (2 is what I have. Player vs AI)
+  hand1 = []
+  hand2 = []
+  
+    
+  #Setting Up:
+  # - Each Player needs 7 random cards
+  for x in range(7):
+    hand1.append(draw())
+    hand2.append(draw())
+  # - A play pile that holds the most recent card
+  play = draw()
+  
+  
+  flag = True
+  while flag:
+    #Win Conditions:
+    # - If the hand is empty
+    if hand1 == []:
+      print("Player has won!")
+      break
+    if hand2 == []:
+      print("The AI has won!")
+      break
+    #Playing the game:
+    # - Player chooses a card
+    #pos = position
+    print(" ----- Play Pile -----")
+    print("Play: ", play)
+    print(" ----- Player -----")
+    print("Player:", hand1)
+    pos = input("Enter the Position(Press Enter to draw): ")
+  
+    try:
+      #Try: pos = int(pos)
+      pos = int(pos)
+      # - Compare the chosen card to the play pile
+      # - The card needs to match colors or number to be playable.
+      if play[0] == hand1[pos][0]:
+        #replace with the play pile
+        play = hand1[pos]
+        hand1.remove(hand1[pos])
+      elif play[1] == hand1[pos][1]:
+        play = hand1[pos]
+        hand1.remove(hand1[pos])
+      else:
+      # - If it is playable, remove the card from hand and replace with the play pile
+      # - Draw a card if not playable or no cards
+        hand1.append(draw())
+  
+    except:
+      #If the player entered anything else, we will just make them draw a card.
+      hand1.append(draw())
+    #Same steps for AI but no picking using input
+  
+  
+    print(" ----- AI -----")
+    print("AI has", len(hand2), "cards.")
+    # ----- AI -----
+    #Make sure when you copy the code, to replace all hand1 with hand2
+    canDraw = True
+    for pos in range(len(hand2)-1):
+      print(hand2)
+      print("POS", pos)
+      # - Compare the chosen card to the play pile
+      # - The card needs to match colors or number to be playable.
+      if play[0] == hand2[pos][0]:
+        #replace with the play pile
+        canDraw = False
+        play = hand2[pos]
+        hand2.remove(hand2[pos])
+        break
+      elif play[1] == hand2[pos][1]:
+        canDraw = False
+        play = hand2[pos]
+        hand2.remove(hand2[pos])
+        break
+    if canDraw:
+      hand2.append(draw())
 
-main()
+
+
