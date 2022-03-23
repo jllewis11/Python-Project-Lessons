@@ -1,8 +1,8 @@
-# Project 2
+# Project 4
 
 
 <br />
-<h3 align="center">Uno</h3>
+<h3 align="center">Weather Data API</h3>
 
 </div>
 
@@ -34,7 +34,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Introduction: Uno is a popular card game where players try to get rid of their cards first following a few simple rules. When playing a card, the card must be the same number or color for the card to be playable. The cards in this game are chosen through the position in the list. (Starting from 0)
+Introduction: This project integrates gathering data from multiple APIs to output certain data. The Mapquest API inputs city and country and returns the longitude and latitude values. The OpenWeatherMap API inputs longitude and latitude and returns a 5 day weather information JSON. The objective of this project is to interpret the JSON data, convert from Kelvin to Fahrenheit, and create personal conditional statements.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -62,13 +62,14 @@ No installation necessary
  - Tuples
  - Array Functions (Append)
  - String Manipulation
- - File TXT Read
  - Functions
  - Return Statements
  - Scope/ Local or Global
+ - APIs Requests
 
 ### Installation
-To run the program, simply run the command `python uno.py`
+1. Create an account with Mapquest and OpenWeatherMap <br>
+2. To run the program, simply run the command `python weather.py`
 
 
 ## Bugs
