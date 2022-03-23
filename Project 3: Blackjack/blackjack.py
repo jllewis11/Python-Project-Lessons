@@ -114,6 +114,7 @@ def blackjackgame():
   
   #Win Conditions:
   # - Whoever has the highest value wins
+  # - It is considered a push if there is a tie
   print("-----Showdown-----")
   print("Player:", player)
   print("Dealer:", dealer)
@@ -123,3 +124,5 @@ def blackjackgame():
     print("Player Loses!")
   elif value(dealer) > 21 or value(dealer) < value(player):
     print("Player Wins!")
+  else:
+    print("Push! It is a tie!")
