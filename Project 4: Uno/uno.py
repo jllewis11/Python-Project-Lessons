@@ -25,6 +25,9 @@
 #Win Conditions:
 # - If the hand is empty
 
+#Possible Repeats(Functions):
+# Draw card 
+
 #----- Coding -----
 #Use the comments and create some space in between to write the actual code.
 
